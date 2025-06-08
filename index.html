@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Interaktif PAI - Kelas 7 Semester 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDF6EC;
+            color: #3C3633;
+        }
+        .option-btn {
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+        .option-btn:hover:not(:disabled) {
+            background-color: #E4DCCF;
+        }
+        .correct {
+            background-color: #22c55e !important;
+            color: white !important;
+            border-color: #16a34a !important;
+        }
+        .incorrect {
+            background-color: #ef4444 !important;
+            color: white !important;
+            border-color: #dc2626 !important;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-[#A4907C]">Kuis Interaktif PAI</h1>
+            <p class="text-lg text-gray-600">Uji Pemahamanmu - Kelas 7 Semester 2</p>
+        </header>
+
+        <div id="quiz-container" class="bg-white/70 p-6 md:p-8 rounded-2xl shadow-lg">
+            <div id="question-area">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl md:text-2xl font-bold text-[#3C3633]" id="question-text">Memuat pertanyaan...</h2>
+                    <span class="text-sm font-semibold bg-[#A4907C] text-white py-1 px-3 rounded-full" id="question-counter"></span>
+                </div>
+                <div id="options-container" class="space-y-4">
+                </div>
+            </div>
+
+            <div id="feedback-area" class="mt-6 hidden">
+                <h3 id="feedback-title" class="text-xl font-bold mb-2"></h3>
+                <div id="feedback-text" class="bg-[#F0EBE3] p-4 rounded-lg text-gray-700"></div>
+                <button id="next-question-btn" class="w-full mt-6 bg-[#A4907C] text-white py-3 rounded-lg font-semibold hover:bg-[#8e7b6b] transition-colors">Lanjut</button>
+            </div>
+        </div>
+
+        <div id="result-container" class="hidden text-center bg-white/70 p-8 rounded-2xl shadow-lg">
+            <h2 class="text-3xl font-bold text-[#A4907C] mb-4">Kuis Selesai!</h2>
+            <p class="text-lg mb-2">Skor Anda:</p>
+            <p class="text-6xl font-bold text-[#3C3633] mb-6" id="score-text"></p>
+            <p class="text-gray-700 mb-6" id="summary-text"></p>
+            <button id="restart-btn" class="w-full md:w-auto px-8 py-3 bg-[#A4907C] text-white rounded-lg font-semibold hover:bg-[#8e7b6b] transition-colors">Ulangi Kuis</button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Menurut Q.S. al-Anbiya'/21:30, langit dan bumi pada awalnya berada dalam keadaan...",
+                options: ["Terpisah jauh", "Menyatu (ratqan)", "Dipenuhi air", "Gelap gulita"],
+                answer: "Menyatu (ratqan)",
+                explanation: "Dalam Q.S. al-Anbiya'/21:30 disebutkan '...langit dan bumi keduanya dahulu menyatu (ratqan), kemudian Kami pisahkan...'. Kata 'ratqan' berarti sesuatu yang padu atau menjadi satu kesatuan."
+            },
+            {
+                question: "Allah Swt. menciptakan langit dan bumi dalam 'enam masa'. Makna dari 'enam masa' adalah...",
+                options: ["Enam hari seperti yang kita kenal", "Enam tahun kalender", "Enam periode atau tahapan waktu", "Enam jam yang sangat panjang"],
+                answer: "Enam periode atau tahapan waktu",
+                explanation: "'Enam masa' menunjukkan adanya proses, tahapan, dan keteraturan dalam penciptaan. Ini bukan berarti 6x24 jam, karena konsep hari baru ada setelah bumi dan matahari tercipta. Ini mengajarkan pentingnya proses."
+            },
+            {
+                question: "Fakta ilmiah bahwa semua makhluk hidup membutuhkan air sebagai komponen utama selaras dengan firman Allah dalam...",
+                options: ["Q.S. al-A'raf/7:54", "Q.S. al-Mujadalah/58:11", "Q.S. al-Hujurat/49:12", "Q.S. al-Anbiya'/21:30"],
+                answer: "Q.S. al-Anbiya'/21:30",
+                explanation: "Q.S. al-Anbiya'/21:30 dengan jelas menyatakan '...dan Kami jadikan segala sesuatu yang hidup berasal dari air...'. Ini menunjukkan keselarasan antara Al-Qur'an dan sains modern."
+            },
+            {
+                question: "Sikap yang paling tepat ketika menerima sebuah berita agar tidak terjerumus dalam gibah dan fitnah adalah...",
+                options: ["Langsung menyebarkannya", "Percaya begitu saja", "Melakukan tabayun (klarifikasi)", "Menambah-nambahi cerita"],
+                answer: "Melakukan tabayun (klarifikasi)",
+                explanation: "Islam mengajarkan pentingnya tabayun, yaitu memeriksa kebenaran berita sebelum diterima dan disebarkan. Hal ini diperintahkan dalam Q.S. al-Hujurat/49:6 untuk menghindari penyesalan."
+            },
+            {
+                question: "Malaikat yang bertugas menyampaikan wahyu kepada para nabi dan rasul adalah...",
+                options: ["Mikail", "Israfil", "Jibril", "Izrail"],
+                answer: "Jibril",
+                explanation: "Malaikat Jibril memiliki tugas utama menyampaikan wahyu dari Allah Swt. kepada para nabi dan rasul-Nya, termasuk Al-Qur'an kepada Nabi Muhammad Saw."
+            },
+            {
+                question: "Keyakinan bahwa setiap amal kita dicatat oleh malaikat akan menumbuhkan sikap...",
+                options: ["Takut pada manusia", "Sombong dan riya", "Mawas diri dan introspeksi", "Putus asa"],
+                answer: "Mawas diri dan introspeksi",
+                explanation: "Iman kepada Malaikat Raqib (pencatat amal baik) dan Atid (pencatat amal buruk) membuat kita selalu berhati-hati (mawas diri) dalam bertindak dan senantiasa mengevaluasi diri (introspeksi)."
+            },
+            {
+                question: "Malaikat diciptakan oleh Allah Swt. dari...",
+                options: ["Api", "Tanah", "Udara", "Cahaya (Nur)"],
+                answer: "Cahaya (Nur)",
+                explanation: "Berdasarkan hadis Nabi Muhammad Saw., malaikat diciptakan dari cahaya (nur), jin diciptakan dari api, dan manusia (Nabi Adam as.) diciptakan dari tanah."
+            },
+            {
+                question: "Berikut ini yang BUKAN merupakan sifat malaikat adalah...",
+                options: ["Selalu taat kepada Allah", "Memiliki hawa nafsu", "Tidak makan dan minum", "Dapat berubah wujud atas izin Allah"],
+                answer: "Memiliki hawa nafsu",
+                explanation: "Malaikat tidak memiliki hawa nafsu. Mereka diciptakan murni untuk taat. Manusia-lah yang diberi akal dan hawa nafsu sehingga memiliki pilihan untuk taat atau durhaka."
+            },
+            {
+                question: "Ucapan terkenal 'Hisablah dirimu sebelum kamu dihisab' adalah dari sahabat...",
+                options: ["Abu Bakar Ash-Shiddiq ra.", "Utsman bin Affan ra.", "Ali bin Abi Thalib ra.", "Umar bin Khattab ra."],
+                answer: "Umar bin Khattab ra.",
+                explanation: "Umar bin Khattab ra. sangat menekankan pentingnya introspeksi diri. Ucapan ini menjadi pengingat bagi kita untuk selalu mengevaluasi perbuatan kita di dunia sebelum dihisab di akhirat."
+            },
+            {
+                question: "Mengapa Islam mewajibkan umatnya untuk menuntut ilmu?",
+                options: ["Agar bisa menjadi kaya raya", "Agar bisa mengalahkan orang lain", "Untuk mengenal Allah dan menjalankan peran khalifah", "Agar terlihat pintar dan dihormati"],
+                answer: "Untuk mengenal Allah dan menjalankan peran khalifah",
+                explanation: "Tujuan utama menuntut ilmu dalam Islam adalah untuk lebih mengenal kebesaran Allah (ma'rifatullah) dan agar mampu menjalankan tugas sebagai khalifah (pemakmur) di muka bumi dengan baik dan benar."
+            },
+             {
+                question: "Sahabat yang mengikat dirinya di tiang masjid sebagai bentuk penyesalan mendalam atas kesalahannya adalah...",
+                options: ["Abu Dzar Al-Ghifari ra.", "Abu Lubabah ra.", "Bilal bin Rabah ra.", "Salman Al-Farisi ra."],
+                answer: "Abu Lubabah ra.",
+                explanation: "Abu Lubabah ra. merasa telah berkhianat kepada Allah dan Rasul-Nya, sehingga ia mengikat dirinya di tiang Masjid Nabawi hingga Allah Swt. menerima taubatnya. Ini adalah contoh introspeksi yang luar biasa."
+            },
+            {
+                question: "Perbuatan membicarakan keburukan orang lain di belakangnya, meskipun hal itu benar, disebut...",
+                options: ["Fitnah", "Namimah (Adu Domba)", "Gibah (Menggunjing)", "Hasad (Dengki)"],
+                answer: "Gibah (Menggunjing)",
+                explanation: "Gibah adalah menyebutkan sesuatu yang ada pada saudaramu yang tidak ia sukai. Jika yang dibicarakan tidak benar, maka itu menjadi fitnah, yang dosanya lebih besar."
+            },
+            {
+                question: "Dalam Q.S. al-Hujurat/49:12, perbuatan gibah diumpamakan seperti...",
+                options: ["Minum khamr", "Memakan daging bangkai saudara sendiri", "Berjudi dan mengundi nasib", "Mencuri timbangan"],
+                answer: "Memakan daging bangkai saudara sendiri",
+                explanation: "Allah Swt. memberikan perumpamaan yang sangat menjijikkan untuk gibah, yaitu seperti memakan daging saudaranya yang sudah mati, untuk menunjukkan betapa buruknya perbuatan tersebut."
+            },
+            {
+                question: "Meringkas salat fardu yang 4 rakaat menjadi 2 rakaat saat bepergian jauh disebut...",
+                options: ["Salat Jamak", "Salat Witir", "Salat Qasar", "Salat Rawatib"],
+                answer: "Salat Qasar",
+                explanation: "Salat Qasar adalah rukhsah (keringanan) dari Allah bagi musafir (orang yang bepergian jauh) untuk meringkas salat Zuhur, Asar, dan Isya menjadi 2 rakaat."
+            },
+            {
+                question: "Menggabungkan salat Zuhur dan Asar lalu dikerjakan di waktu Zuhur disebut...",
+                options: ["Jamak Takhir", "Jamak Qasar", "Jamak Takdim", "Jamak Haqiqi"],
+                answer: "Jamak Takdim",
+                explanation: "Jamak Takdim (takdim = didahulukan) adalah menggabungkan dua salat dan dikerjakan pada waktu salat yang pertama. Contoh: Zuhur dan Asar dikerjakan di waktu Zuhur."
+            },
+            {
+                question: "Panglima yang memimpin penaklukan Andalusia (Spanyol) pada tahun 711 M adalah...",
+                options: ["Khalid bin Walid", "Sa'ad bin Abi Waqqas", "Thariq bin Ziyad", "Musa bin Nushair"],
+                answer: "Thariq bin Ziyad",
+                explanation: "Thariq bin Ziyad adalah panglima pasukan Islam yang memimpin ekspedisi menyeberangi selat Gibraltar dan memulai era keemasan Islam di Andalusia."
+            },
+            {
+                question: "Kota di Andalusia yang menjadi pusat ilmu pengetahuan dunia pada masa keemasan Islam adalah...",
+                options: ["Madrid", "Sevilla", "Granada", "Cordoba"],
+                answer: "Cordoba",
+                explanation: "Cordoba menjadi ibu kota Andalusia dan pusat peradaban yang sangat maju, dengan perpustakaan megah, universitas, dan menjadi tempat para ilmuwan dan pelajar dari seluruh dunia berkumpul."
+            },
+            {
+                question: "Salah satu faktor utama runtuhnya peradaban Islam di Andalusia adalah...",
+                options: ["Serangan dari luar", "Bencana alam", "Konflik internal dan perpecahan penguasa", "Wabah penyakit"],
+                answer: "Konflik internal dan perpecahan penguasa",
+                explanation: "Keruntuhan Andalusia disebabkan oleh faktor internal seperti perebutan kekuasaan, terpecahnya wilayah menjadi kerajaan-kerajaan kecil yang saling berperang, dan mulai meninggalkan semangat keilmuan."
+            },
+            {
+                question: "Al-Zahrawi adalah ilmuwan Muslim dari Andalusia yang terkenal sebagai 'Bapak...'",
+                options: ["Kimia Modern", "Optik Modern", "Ilmu Bedah Modern", "Sosiologi Modern"],
+                answer: "Ilmu Bedah Modern",
+                explanation: "Al-Zahrawi (Abulcasis) menulis kitab Al-Tasrif yang menjadi rujukan utama ilmu bedah di Eropa selama berabad-abad. Beliau menemukan banyak alat bedah yang menjadi dasar peralatan modern."
+            },
+            {
+                question: "Pelajaran paling berharga dari sejarah kejayaan dan keruntuhan Andalusia adalah pentingnya...",
+                options: ["Memiliki senjata yang kuat", "Menguasai banyak wilayah", "Iman, ilmu, akhlak, dan persatuan", "Membangun istana yang megah"],
+                answer: "Iman, ilmu, akhlak, dan persatuan",
+                explanation: "Kejayaan Andalusia dibangun di atas fondasi iman yang kuat, semangat mencari ilmu, akhlak yang mulia, dan toleransi. Keruntuhannya disebabkan oleh hilangnya persatuan dan semangat tersebut. Ini adalah cermin bagi kita hari ini."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const quizContainer = document.getElementById('quiz-container');
+        const resultContainer = document.getElementById('result-container');
+        const questionText = document.getElementById('question-text');
+        const questionCounter = document.getElementById('question-counter');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackArea = document.getElementById('feedback-area');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackText = document.getElementById('feedback-text');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const scoreText = document.getElementById('score-text');
+        const summaryText = document.getElementById('summary-text');
+
+        function loadQuestion() {
+            if (currentQuestionIndex < quizData.length) {
+                feedbackArea.classList.add('hidden');
+                optionsContainer.innerHTML = '';
+                const question = quizData[currentQuestionIndex];
+                questionText.textContent = question.question;
+                questionCounter.textContent = `${currentQuestionIndex + 1} / ${quizData.length}`;
+                
+                question.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = 'w-full text-left p-4 bg-white border-2 border-gray-200 rounded-lg option-btn';
+                    button.onclick = () => selectAnswer(option, question.answer, button);
+                    optionsContainer.appendChild(button);
+                });
+            } else {
+                showResults();
+            }
+        }
+
+        function selectAnswer(selectedOption, correctAnswer, btn) {
+            const options = optionsContainer.querySelectorAll('.option-btn');
+            let isCorrect = selectedOption === correctAnswer;
+
+            if (isCorrect) {
+                score++;
+                btn.classList.add('correct');
+                feedbackTitle.textContent = "Jawaban Benar!";
+                feedbackTitle.className = "text-xl font-bold mb-2 text-green-600";
+            } else {
+                btn.classList.add('incorrect');
+                feedbackTitle.textContent = "Jawaban Salah!";
+                feedbackTitle.className = "text-xl font-bold mb-2 text-red-600";
+                
+                options.forEach(opt => {
+                    if (opt.textContent === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            options.forEach(opt => opt.disabled = true);
+            
+            feedbackText.innerHTML = `<p class="font-bold mb-2">Pembahasan:</p><p>${quizData[currentQuestionIndex].explanation}</p>`;
+            feedbackArea.classList.remove('hidden');
+
+            if (currentQuestionIndex === quizData.length - 1) {
+                nextQuestionBtn.textContent = "Lihat Hasil";
+            }
+        }
+        
+        function showResults() {
+            quizContainer.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+            const finalScore = (score / quizData.length) * 100;
+            scoreText.textContent = Math.round(finalScore);
+            summaryText.textContent = `Kamu berhasil menjawab dengan benar ${score} dari ${quizData.length} pertanyaan.`;
+        }
+
+        nextQuestionBtn.addEventListener('click', () => {
+            currentQuestionIndex++;
+            loadQuestion();
+        });
+
+        restartBtn.addEventListener('click', () => {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultContainer.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            nextQuestionBtn.textContent = "Lanjut";
+            loadQuestion();
+        });
+
+        loadQuestion();
+    </script>
+</body>
+</html>
