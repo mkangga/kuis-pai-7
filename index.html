@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Interaktif PAI - Kelas 7 Semester 2</title>
+    <title>Kuis Baru PAI - Kelas 7 Semester 2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,22 +30,25 @@
             color: white !important;
             border-color: #dc2626 !important;
         }
+        #quiz-container {
+            min-height: 450px;
+        }
     </style>
 </head>
 <body class="antialiased">
     <div class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
         <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-[#A4907C]">Kuis Interaktif PAI</h1>
-            <p class="text-lg text-gray-600">Uji Pemahamanmu - Kelas 7 Semester 2</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-[#A4907C]">Kuis Interaktif PAI (Set Baru)</h1>
+            <p class="text-lg text-gray-600">Uji Pemahamanmu Lebih Dalam!</p>
         </header>
 
-        <div id="quiz-container" class="bg-white/70 p-6 md:p-8 rounded-2xl shadow-lg">
+        <div id="quiz-container" class="bg-white/70 p-6 md:p-8 rounded-2xl shadow-lg flex flex-col justify-between">
             <div id="question-area">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl md:text-2xl font-bold text-[#3C3633]" id="question-text">Memuat pertanyaan...</h2>
                     <span class="text-sm font-semibold bg-[#A4907C] text-white py-1 px-3 rounded-full" id="question-counter"></span>
                 </div>
-                <div id="options-container" class="space-y-4">
+                <div id="options-container" class="space-y-3">
                 </div>
             </div>
 
@@ -58,7 +61,7 @@
 
         <div id="result-container" class="hidden text-center bg-white/70 p-8 rounded-2xl shadow-lg">
             <h2 class="text-3xl font-bold text-[#A4907C] mb-4">Kuis Selesai!</h2>
-            <p class="text-lg mb-2">Skor Anda:</p>
+            <p class="text-lg mb-2">Skor Akhir Anda:</p>
             <p class="text-6xl font-bold text-[#3C3633] mb-6" id="score-text"></p>
             <p class="text-gray-700 mb-6" id="summary-text"></p>
             <button id="restart-btn" class="w-full md:w-auto px-8 py-3 bg-[#A4907C] text-white rounded-lg font-semibold hover:bg-[#8e7b6b] transition-colors">Ulangi Kuis</button>
@@ -67,125 +70,191 @@
 
     <script>
         const quizData = [
+            // Bab 6: Alam Semesta
             {
-                question: "Menurut Q.S. al-Anbiya'/21:30, langit dan bumi pada awalnya berada dalam keadaan...",
-                options: ["Terpisah jauh", "Menyatu (ratqan)", "Dipenuhi air", "Gelap gulita"],
-                answer: "Menyatu (ratqan)",
-                explanation: "Dalam Q.S. al-Anbiya'/21:30 disebutkan '...langit dan bumi keduanya dahulu menyatu (ratqan), kemudian Kami pisahkan...'. Kata 'ratqan' berarti sesuatu yang padu atau menjadi satu kesatuan."
+                question: "Tanda-tanda kekuasaan Allah Swt. yang terhampar di alam semesta, seperti gunung, laut, dan bintang, disebut juga...",
+                options: ["Ayat Qauliyah", "Ayat Kauniyah", "Sunnatullah", "Mukjizat"],
+                answer: "Ayat Kauniyah",
+                explanation: "Ayat Kauniyah adalah tanda-tanda kebesaran Allah yang dapat kita amati di alam semesta. Sedangkan Ayat Qauliyah adalah firman Allah yang tertulis dalam kitab suci seperti Al-Qur'an."
             },
             {
-                question: "Allah Swt. menciptakan langit dan bumi dalam 'enam masa'. Makna dari 'enam masa' adalah...",
-                options: ["Enam hari seperti yang kita kenal", "Enam tahun kalender", "Enam periode atau tahapan waktu", "Enam jam yang sangat panjang"],
-                answer: "Enam periode atau tahapan waktu",
-                explanation: "'Enam masa' menunjukkan adanya proses, tahapan, dan keteraturan dalam penciptaan. Ini bukan berarti 6x24 jam, karena konsep hari baru ada setelah bumi dan matahari tercipta. Ini mengajarkan pentingnya proses."
+                question: "Hukum alam yang tetap dan teratur yang ditetapkan oleh Allah Swt., seperti pergantian siang dan malam, disebut...",
+                options: ["Takdir", "Qada", "Ketetapan", "Sunnatullah"],
+                answer: "Sunnatullah",
+                explanation: "Sunnatullah adalah hukum-hukum Allah yang berlaku di alam semesta. Keteraturan ini membuktikan adanya Sang Maha Pengatur."
             },
             {
-                question: "Fakta ilmiah bahwa semua makhluk hidup membutuhkan air sebagai komponen utama selaras dengan firman Allah dalam...",
-                options: ["Q.S. al-A'raf/7:54", "Q.S. al-Mujadalah/58:11", "Q.S. al-Hujurat/49:12", "Q.S. al-Anbiya'/21:30"],
-                answer: "Q.S. al-Anbiya'/21:30",
-                explanation: "Q.S. al-Anbiya'/21:30 dengan jelas menyatakan '...dan Kami jadikan segala sesuatu yang hidup berasal dari air...'. Ini menunjukkan keselarasan antara Al-Qur'an dan sains modern."
+                question: "Kewajiban menuntut ilmu dalam Islam berlaku untuk...",
+                options: ["Hanya laki-laki", "Hanya orang dewasa", "Hanya orang kaya", "Setiap Muslim, laki-laki dan perempuan"],
+                answer: "Setiap Muslim, laki-laki dan perempuan",
+                explanation: "Hadis Nabi Muhammad Saw. menyatakan 'Menuntut ilmu itu wajib atas setiap Muslim', yang mencakup laki-laki dan perempuan tanpa terkecuali."
             },
             {
-                question: "Sikap yang paling tepat ketika menerima sebuah berita agar tidak terjerumus dalam gibah dan fitnah adalah...",
-                options: ["Langsung menyebarkannya", "Percaya begitu saja", "Melakukan tabayun (klarifikasi)", "Menambah-nambahi cerita"],
-                answer: "Melakukan tabayun (klarifikasi)",
-                explanation: "Islam mengajarkan pentingnya tabayun, yaitu memeriksa kebenaran berita sebelum diterima dan disebarkan. Hal ini diperintahkan dalam Q.S. al-Hujurat/49:6 untuk menghindari penyesalan."
+                question: "Menurut para ulama, sikap terendah yang masih tergolong baik terhadap ilmu adalah...",
+                options: ["Mengajarkan ilmu", "Mempelajari ilmu", "Mendengarkan ilmu", "Mencintai ilmu dan ahlinya"],
+                answer: "Mencintai ilmu dan ahlinya",
+                explanation: "Urutannya adalah: 1. Mengajarkan, 2. Mempelajari, 3. Mendengarkan, 4. Mencintai. Mencintai ilmu sudah merupakan kebaikan, dan jangan sampai menjadi yang kelima, yaitu membencinya."
+            },
+             // Bab 7: Mawas Diri & Malaikat
+            {
+                question: "Introspeksi diri atau mengevaluasi perbuatan diri sendiri dalam Islam dikenal dengan istilah...",
+                options: ["Tafakur", "Tadabur", "Muhasabah", "Tawakal"],
+                answer: "Muhasabah",
+                explanation: "Muhasabah adalah proses menghitung atau mengevaluasi amal perbuatan diri sendiri untuk perbaikan di masa depan, sesuai dengan prinsip 'hisablah dirimu sebelum dihisab'."
             },
             {
-                question: "Malaikat yang bertugas menyampaikan wahyu kepada para nabi dan rasul adalah...",
-                options: ["Mikail", "Israfil", "Jibril", "Izrail"],
-                answer: "Jibril",
-                explanation: "Malaikat Jibril memiliki tugas utama menyampaikan wahyu dari Allah Swt. kepada para nabi dan rasul-Nya, termasuk Al-Qur'an kepada Nabi Muhammad Saw."
+                question: "Mengimani Malaikat Mikail yang bertugas membagi rezeki seharusnya membuat kita memiliki sikap...",
+                options: ["Malas bekerja karena rezeki sudah diatur", "Rajin berusaha dan selalu bersyukur", "Takut kehabisan rezeki", "Iri dengan rezeki orang lain"],
+                answer: "Rajin berusaha dan selalu bersyukur",
+                explanation: "Iman kepada Malaikat Mikail mengajarkan kita untuk menyeimbangkan antara ikhtiar (berusaha) secara maksimal dan tawakal (berserah diri) sambil mensyukuri setiap rezeki yang diberikan Allah."
             },
             {
-                question: "Keyakinan bahwa setiap amal kita dicatat oleh malaikat akan menumbuhkan sikap...",
-                options: ["Takut pada manusia", "Sombong dan riya", "Mawas diri dan introspeksi", "Putus asa"],
-                answer: "Mawas diri dan introspeksi",
-                explanation: "Iman kepada Malaikat Raqib (pencatat amal baik) dan Atid (pencatat amal buruk) membuat kita selalu berhati-hati (mawas diri) dalam bertindak dan senantiasa mengevaluasi diri (introspeksi)."
+                question: "Apa perbedaan mendasar antara jin dan malaikat berdasarkan asal penciptaannya?",
+                options: ["Jin terlihat, malaikat tidak", "Jin dari api, malaikat dari cahaya", "Jin jahat, malaikat baik", "Jin punya nafsu, malaikat tidak"],
+                answer: "Jin dari api, malaikat dari cahaya",
+                explanation: "Berdasarkan hadis, Nabi menjelaskan bahwa malaikat diciptakan dari cahaya (nur), jin diciptakan dari nyala api (marij min nar), dan Adam (manusia) diciptakan dari tanah."
             },
             {
-                question: "Malaikat diciptakan oleh Allah Swt. dari...",
-                options: ["Api", "Tanah", "Udara", "Cahaya (Nur)"],
-                answer: "Cahaya (Nur)",
-                explanation: "Berdasarkan hadis Nabi Muhammad Saw., malaikat diciptakan dari cahaya (nur), jin diciptakan dari api, dan manusia (Nabi Adam as.) diciptakan dari tanah."
+                question: "Perilaku di sekolah yang paling mencerminkan iman kepada Malaikat Raqib dan Atid adalah...",
+                options: ["Mengerjakan PR karena takut dihukum guru", "Tidak menyontek meskipun tidak ada yang mengawasi", "Aktif di kelas agar dipuji teman", "Memberi contekan kepada teman"],
+                answer: "Tidak menyontek meskipun tidak ada yang mengawasi",
+                explanation: "Sikap ini menunjukkan kesadaran bahwa selalu ada pengawasan dari Allah melalui malaikat-Nya, sehingga perbuatan baik atau buruk dilakukan bukan karena manusia, melainkan karena iman."
             },
             {
-                question: "Berikut ini yang BUKAN merupakan sifat malaikat adalah...",
-                options: ["Selalu taat kepada Allah", "Memiliki hawa nafsu", "Tidak makan dan minum", "Dapat berubah wujud atas izin Allah"],
-                answer: "Memiliki hawa nafsu",
-                explanation: "Malaikat tidak memiliki hawa nafsu. Mereka diciptakan murni untuk taat. Manusia-lah yang diberi akal dan hawa nafsu sehingga memiliki pilihan untuk taat atau durhaka."
+                question: "Mengimani Malaikat Israfil yang akan meniup sangkakala akan selalu mengingatkan kita tentang...",
+                options: ["Pentingnya rezeki", "Kewajiban salat", "Kepastian datangnya hari kiamat", "Proses kematian"],
+                answer: "Kepastian datangnya hari kiamat",
+                explanation: "Tugas Malaikat Israfil adalah meniup sangkakala pada hari kiamat. Mengimaninya akan membuat kita sadar bahwa kehidupan dunia ini tidak abadi dan akan berakhir."
+            },
+            // Bab 8: Menjaga Lisan
+            {
+                question: "Perbuatan membicarakan keburukan orang lain dengan tujuan agar orang-orang saling membenci disebut...",
+                options: ["Gibah", "Fitnah", "Namimah (Adu Domba)", "Su'udzan"],
+                answer: "Namimah (Adu Domba)",
+                explanation: "Namimah (adu domba) adalah perbuatan memindahkan perkataan seseorang kepada orang lain dengan tujuan merusak hubungan di antara mereka. Ini lebih dari sekadar gibah."
             },
             {
-                question: "Ucapan terkenal 'Hisablah dirimu sebelum kamu dihisab' adalah dari sahabat...",
-                options: ["Abu Bakar Ash-Shiddiq ra.", "Utsman bin Affan ra.", "Ali bin Abi Thalib ra.", "Umar bin Khattab ra."],
-                answer: "Umar bin Khattab ra.",
-                explanation: "Umar bin Khattab ra. sangat menekankan pentingnya introspeksi diri. Ucapan ini menjadi pengingat bagi kita untuk selalu mengevaluasi perbuatan kita di dunia sebelum dihisab di akhirat."
+                question: "Menyebarkan berita bohong yang dapat merusak kehormatan seseorang adalah perbuatan...",
+                options: ["Gibah", "Fitnah", "Tabayun", "Husnuzan"],
+                answer: "Fitnah",
+                explanation: "Fitnah adalah tuduhan atau berita bohong yang disebarkan untuk menjelekkan orang lain. Dosanya lebih besar daripada gibah, dan dalam Al-Qur'an disebut 'lebih kejam dari pembunuhan'."
             },
             {
-                question: "Mengapa Islam mewajibkan umatnya untuk menuntut ilmu?",
-                options: ["Agar bisa menjadi kaya raya", "Agar bisa mengalahkan orang lain", "Untuk mengenal Allah dan menjalankan peran khalifah", "Agar terlihat pintar dan dihormati"],
-                answer: "Untuk mengenal Allah dan menjalankan peran khalifah",
-                explanation: "Tujuan utama menuntut ilmu dalam Islam adalah untuk lebih mengenal kebesaran Allah (ma'rifatullah) dan agar mampu menjalankan tugas sebagai khalifah (pemakmur) di muka bumi dengan baik dan benar."
-            },
-             {
-                question: "Sahabat yang mengikat dirinya di tiang masjid sebagai bentuk penyesalan mendalam atas kesalahannya adalah...",
-                options: ["Abu Dzar Al-Ghifari ra.", "Abu Lubabah ra.", "Bilal bin Rabah ra.", "Salman Al-Farisi ra."],
-                answer: "Abu Lubabah ra.",
-                explanation: "Abu Lubabah ra. merasa telah berkhianat kepada Allah dan Rasul-Nya, sehingga ia mengikat dirinya di tiang Masjid Nabawi hingga Allah Swt. menerima taubatnya. Ini adalah contoh introspeksi yang luar biasa."
+                question: "Apa akibat dari perbuatan gibah di akhirat berdasarkan penjelasan hadis?",
+                options: ["Dimasukkan ke neraka selamanya", "Pahalanya diberikan kepada orang yang digunjingkan", "Hartanya akan habis", "Wajahnya menjadi hitam"],
+                answer: "Pahalanya diberikan kepada orang yang digunjingkan",
+                explanation: "Dalam sebuah hadis, Rasulullah Saw. menjelaskan bahwa orang yang melakukan gibah akan 'bangkrut' di hari kiamat, karena pahala kebaikannya akan ditransfer kepada orang yang ia gunjingkan."
             },
             {
-                question: "Perbuatan membicarakan keburukan orang lain di belakangnya, meskipun hal itu benar, disebut...",
-                options: ["Fitnah", "Namimah (Adu Domba)", "Gibah (Menggunjing)", "Hasad (Dengki)"],
-                answer: "Gibah (Menggunjing)",
-                explanation: "Gibah adalah menyebutkan sesuatu yang ada pada saudaramu yang tidak ia sukai. Jika yang dibicarakan tidak benar, maka itu menjadi fitnah, yang dosanya lebih besar."
+                question: "Dalam kondisi tertentu, seperti untuk mencari keadilan di depan hakim, membicarakan keburukan seseorang hukumnya...",
+                options: ["Tetap haram", "Makruh", "Sunnah", "Diperbolehkan"],
+                answer: "Diperbolehkan",
+                explanation: "Ada beberapa pengecualian gibah yang dibolehkan, salah satunya adalah ketika bersaksi di pengadilan untuk mengungkap kezaliman dan mencari keadilan."
+            },
+            // Bab 9: Salat Jamak & Qasar
+            {
+                question: "Seseorang yang melakukan perjalanan jauh (musafir) boleh mulai menjamak dan mengqasar salatnya ketika ia telah...",
+                options: ["Berniat di dalam rumah", "Keluar dari pintu rumahnya", "Melewati batas wilayah tempat tinggalnya", "Sampai di tempat tujuan"],
+                answer: "Melewati batas wilayah tempat tinggalnya",
+                explanation: "Rukhsah safar (keringanan perjalanan) mulai berlaku setelah seseorang benar-benar keluar dari batas desa, kota, atau wilayah pemukimannya."
             },
             {
-                question: "Dalam Q.S. al-Hujurat/49:12, perbuatan gibah diumpamakan seperti...",
-                options: ["Minum khamr", "Memakan daging bangkai saudara sendiri", "Berjudi dan mengundi nasib", "Mencuri timbangan"],
-                answer: "Memakan daging bangkai saudara sendiri",
-                explanation: "Allah Swt. memberikan perumpamaan yang sangat menjijikkan untuk gibah, yaitu seperti memakan daging saudaranya yang sudah mati, untuk menunjukkan betapa buruknya perbuatan tersebut."
+                question: "Seorang musafir berencana tinggal di sebuah kota selama 5 hari. Bagaimana status salatnya?",
+                options: ["Tetap boleh menjamak dan qasar", "Hanya boleh qasar", "Ia harus salat seperti biasa (tidak jamak/qasar)", "Hanya boleh jamak"],
+                answer: "Ia harus salat seperti biasa (tidak jamak/qasar)",
+                explanation: "Menurut mayoritas ulama, jika seorang musafir berniat untuk menetap di suatu tempat lebih dari 4 hari, maka status musafirnya gugur dan ia harus salat secara sempurna (itmam)."
             },
             {
-                question: "Meringkas salat fardu yang 4 rakaat menjadi 2 rakaat saat bepergian jauh disebut...",
-                options: ["Salat Jamak", "Salat Witir", "Salat Qasar", "Salat Rawatib"],
-                answer: "Salat Qasar",
-                explanation: "Salat Qasar adalah rukhsah (keringanan) dari Allah bagi musafir (orang yang bepergian jauh) untuk meringkas salat Zuhur, Asar, dan Isya menjadi 2 rakaat."
+                question: "Apakah seorang musafir boleh melakukan salat qasar saja (misalnya salat Zuhur 2 rakaat) tanpa menjamaknya dengan salat Asar?",
+                options: ["Tidak boleh, harus selalu digabung", "Ya, boleh", "Hanya boleh jika perjalanannya sangat jauh", "Haram hukumnya"],
+                answer: "Ya, boleh",
+                explanation: "Jamak dan qasar adalah dua jenis rukhsah yang berbeda. Seorang musafir boleh memilih untuk mengqasar salat saja, menjamak saja, atau melakukan keduanya (jamak sekaligus qasar)."
             },
             {
-                question: "Menggabungkan salat Zuhur dan Asar lalu dikerjakan di waktu Zuhur disebut...",
-                options: ["Jamak Takhir", "Jamak Qasar", "Jamak Takdim", "Jamak Haqiqi"],
-                answer: "Jamak Takdim",
-                explanation: "Jamak Takdim (takdim = didahulukan) adalah menggabungkan dua salat dan dikerjakan pada waktu salat yang pertama. Contoh: Zuhur dan Asar dikerjakan di waktu Zuhur."
+                question: "Seorang musafir dari Bandung ke Yogyakarta ingin menjamak takhir salat Magrib dan Isya. Kapan dan bagaimana ia melaksanakannya?",
+                options: ["Di waktu Magrib, salat Isya dulu baru Magrib", "Di waktu Isya, salat Magrib 3 rakaat lalu Isya 2 rakaat", "Di waktu Magrib, salat Magrib 3 rakaat lalu Isya 4 rakaat", "Di waktu Isya, salat Isya 4 rakaat saja"],
+                answer: "Di waktu Isya, salat Magrib 3 rakaat lalu Isya 2 rakaat",
+                explanation: "Jamak takhir berarti dilaksanakan di waktu salat kedua (Isya). Salat Magrib tidak bisa diqasar (tetap 3 rakaat), sedangkan Isya bisa diqasar menjadi 2 rakaat. Urutannya tetap salat pertama (Magrib) baru salat kedua (Isya)."
             },
             {
-                question: "Panglima yang memimpin penaklukan Andalusia (Spanyol) pada tahun 711 M adalah...",
-                options: ["Khalid bin Walid", "Sa'ad bin Abi Waqqas", "Thariq bin Ziyad", "Musa bin Nushair"],
-                answer: "Thariq bin Ziyad",
-                explanation: "Thariq bin Ziyad adalah panglima pasukan Islam yang memimpin ekspedisi menyeberangi selat Gibraltar dan memulai era keemasan Islam di Andalusia."
+                question: "Rukhsah salat bagi musafir menunjukkan bahwa Islam adalah agama yang...",
+                options: ["Kaku dan sulit", "Hanya untuk orang Arab", "Mudah dan tidak memberatkan (rahmatan lil 'alamin)", "Penuh dengan aturan yang rumit"],
+                answer: "Mudah dan tidak memberatkan (rahmatan lil 'alamin)",
+                explanation: "Adanya rukhsah membuktikan sifat Islam sebagai agama yang fleksibel, penuh kasih sayang, dan memahami kondisi umatnya, sehingga ibadah tetap bisa dilaksanakan dalam berbagai keadaan."
+            },
+            // Bab 10: Andalusia
+            {
+                question: "Istana megah yang menjadi bukti puncak seni arsitektur Islam di Granada, Andalusia, adalah...",
+                options: ["Masjid Agung Cordoba", "Istana Topkapi", "Menara Giralda", "Istana Alhambra"],
+                answer: "Istana Alhambra",
+                explanation: "Istana Alhambra di Granada dikenal di seluruh dunia karena keindahan arsitektur, ukiran kaligrafi, dan taman-tamannya yang menakjubkan. Ini adalah peninggalan dari Dinasti Bani Ahmar."
             },
             {
-                question: "Kota di Andalusia yang menjadi pusat ilmu pengetahuan dunia pada masa keemasan Islam adalah...",
-                options: ["Madrid", "Sevilla", "Granada", "Cordoba"],
-                answer: "Cordoba",
-                explanation: "Cordoba menjadi ibu kota Andalusia dan pusat peradaban yang sangat maju, dengan perpustakaan megah, universitas, dan menjadi tempat para ilmuwan dan pelajar dari seluruh dunia berkumpul."
+                question: "Ilmuwan Andalusia yang dikenal sebagai pelopor dalam bidang penerbangan karena mencoba terbang menggunakan alat buatannya adalah...",
+                options: ["Ibnu Rusyd", "Al-Zahrawi", "Abbas bin Firnas", "Ibnu Khaldun"],
+                answer: "Abbas bin Firnas",
+                explanation: "Abbas bin Firnas adalah seorang ilmuwan polimatik yang pada abad ke-9 M melakukan percobaan terbang dengan membuat sayap, menjadikannya salah satu perintis dalam sejarah aviasi."
             },
             {
-                question: "Salah satu faktor utama runtuhnya peradaban Islam di Andalusia adalah...",
-                options: ["Serangan dari luar", "Bencana alam", "Konflik internal dan perpecahan penguasa", "Wabah penyakit"],
-                answer: "Konflik internal dan perpecahan penguasa",
-                explanation: "Keruntuhan Andalusia disebabkan oleh faktor internal seperti perebutan kekuasaan, terpecahnya wilayah menjadi kerajaan-kerajaan kecil yang saling berperang, dan mulai meninggalkan semangat keilmuan."
+                question: "Semangat para ilmuwan Muslim Andalusia untuk menerjemahkan dan mengembangkan ilmu dari peradaban lain (Yunani, India) menunjukkan sikap...",
+                options: ["Meniru tanpa berpikir", "Merasa rendah diri", "Terbuka dan cinta pada kebenaran", "Menolak budaya asing"],
+                answer: "Terbuka dan cinta pada kebenaran",
+                explanation: "Mereka tidak hanya menerjemahkan, tetapi juga mengoreksi, mengkritik, dan mengembangkan ilmu tersebut, yang menunjukkan sikap terbuka, percaya diri, dan cinta pada kebenaran dari manapun sumbernya."
             },
             {
-                question: "Al-Zahrawi adalah ilmuwan Muslim dari Andalusia yang terkenal sebagai 'Bapak...'",
-                options: ["Kimia Modern", "Optik Modern", "Ilmu Bedah Modern", "Sosiologi Modern"],
-                answer: "Ilmu Bedah Modern",
-                explanation: "Al-Zahrawi (Abulcasis) menulis kitab Al-Tasrif yang menjadi rujukan utama ilmu bedah di Eropa selama berabad-abad. Beliau menemukan banyak alat bedah yang menjadi dasar peralatan modern."
+                question: "Selain sebagai tempat ibadah, Masjid Agung Cordoba pada masanya juga berfungsi sebagai...",
+                options: ["Pusat pemerintahan dan benteng", "Hanya pasar", "Pusat pendidikan (universitas) dan kegiatan sosial", "Tempat pemakaman raja"],
+                answer: "Pusat pendidikan (universitas) dan kegiatan sosial",
+                explanation: "Masjid-masjid besar pada masa keemasan Islam, termasuk Masjid Cordoba, berfungsi sebagai pusat komunitas, tempat para ulama mengajar dan berdiskusi, menjadikannya seperti universitas terbuka."
+            },
+             // Soal Tambahan
+            {
+                question: "Apa tujuan utama Allah Swt. menciptakan manusia dengan akal dan nafsu, berbeda dengan malaikat?",
+                options: ["Agar manusia selalu berbuat dosa", "Agar manusia bisa menjadi lebih mulia dari malaikat dengan memilih taat", "Agar manusia bisa menguasai alam", "Agar manusia saling berperang"],
+                answer: "Agar manusia bisa menjadi lebih mulia dari malaikat dengan memilih taat",
+                explanation: "Dengan adanya pilihan untuk taat atau durhaka, manusia yang memilih jalan ketaatan karena imannya akan memiliki derajat yang lebih tinggi, bahkan melebihi malaikat yang ketaatannya bersifat kodrati."
             },
             {
-                question: "Pelajaran paling berharga dari sejarah kejayaan dan keruntuhan Andalusia adalah pentingnya...",
-                options: ["Memiliki senjata yang kuat", "Menguasai banyak wilayah", "Iman, ilmu, akhlak, dan persatuan", "Membangun istana yang megah"],
-                answer: "Iman, ilmu, akhlak, dan persatuan",
-                explanation: "Kejayaan Andalusia dibangun di atas fondasi iman yang kuat, semangat mencari ilmu, akhlak yang mulia, dan toleransi. Keruntuhannya disebabkan oleh hilangnya persatuan dan semangat tersebut. Ini adalah cermin bagi kita hari ini."
+                question: "Sikap 'husnuzan' (berbaik sangka) adalah kebalikan dari sikap...",
+                options: ["Riya (pamer)", "Takabur (sombong)", "Su'udzan (berburuk sangka)", "Hasad (dengki)"],
+                answer: "Su'udzan (berburuk sangka)",
+                explanation: "Husnuzan adalah kunci untuk menjaga hati dan lisan. Dengan berbaik sangka, kita tidak akan mudah menuduh, menggunjing, atau memfitnah orang lain."
+            },
+            {
+                question: "Jarak minimal seseorang diperbolehkan menjamak salat (safar syar'i) menurut mayoritas ulama adalah sekitar...",
+                options: ["20-30 km", "50-60 km", "81-90 km", "Diatas 150 km"],
+                answer: "81-90 km",
+                explanation: "Para ulama fikih menetapkan jarak minimal ini (sekitar 2 marhalah) sebagai batas kapan seseorang dianggap musafir dan berhak mendapatkan keringanan dalam ibadah."
+            },
+            {
+                question: "Ketika mendengar berita tentang keburukan teman, tindakan pertama yang harus dilakukan sesuai ajaran Islam adalah...",
+                options: ["Menasihatinya di depan umum", "Menyebarkannya agar teman lain waspada", "Menutup aibnya dan mendoakannya", "Langsung menjauhinya"],
+                answer: "Menutup aibnya dan mendoakannya",
+                explanation: "Islam mengajarkan untuk menutupi aib saudara sesama muslim. Jika memungkinkan, kita bisa menasihatinya secara pribadi dengan cara yang baik, bukan mengumumkannya."
+            },
+            {
+                question: "Toleransi beragama yang dipraktikkan di Andalusia pada masa kejayaan Islam mengajarkan kita bahwa...",
+                options: ["Semua agama sama saja", "Perbedaan keyakinan dapat menjadi sumber kemajuan dan kerja sama", "Umat Islam harus mengalah", "Ilmu pengetahuan tidak penting"],
+                answer: "Perbedaan keyakinan dapat menjadi sumber kemajuan dan kerja sama",
+                explanation: "Sejarah Andalusia membuktikan bahwa ketika umat Islam memimpin dengan adil dan toleran, umat beragama lain dapat hidup dengan aman dan bersama-sama membangun peradaban yang maju."
+            },
+            {
+                question: "Berikut ini yang BUKAN merupakan hikmah dari iman kepada malaikat adalah...",
+                options: ["Mendorong untuk selalu berbuat baik", "Menumbuhkan sikap hati-hati dalam bertindak", "Membuat kita bisa melihat wujud malaikat", "Menambah keyakinan akan kebesaran Allah Swt."],
+                answer: "Membuat kita bisa melihat wujud malaikat",
+                explanation: "Iman kepada malaikat adalah bagian dari iman kepada yang gaib. Kita wajib meyakini keberadaan mereka tanpa harus bisa melihatnya. Hikmahnya terletak pada dampak positifnya terhadap akhlak kita."
+            },
+            {
+                question: "Apa yang harus dilakukan jika kita tidak sengaja melakukan gibah?",
+                options: ["Membiarkannya saja karena sudah terjadi", "Meminta maaf langsung kepada orang yang dibicarakan", "Berpuasa selama tiga hari", "Bersedekah dengan jumlah banyak"],
+                answer: "Meminta maaf langsung kepada orang yang dibicarakan",
+                explanation: "Taubat dari dosa gibah memiliki dua syarat: 1. Menyesal dan memohon ampun kepada Allah. 2. Meminta maaf (memohon kehalalan) dari orang yang telah kita gunjingkan."
+            },
+            {
+                question: "Peninggalan Islam di Andalusia menjadi bukti bahwa kemajuan peradaban harus seimbang antara...",
+                options: ["Kekuatan militer dan kekayaan", "Pembangunan fisik dan kemajuan spiritual (iman & ilmu)", "Seni dan olahraga", "Perdagangan dan pertanian"],
+                answer: "Pembangunan fisik dan kemajuan spiritual (iman & ilmu)",
+                explanation: "Kejayaan Andalusia tidak hanya pada istana dan masjid yang megah (fisik), tetapi juga pada lahirnya para ilmuwan hebat dan masyarakat yang berakhlak (spiritual dan intelektual)."
             }
         ];
 
